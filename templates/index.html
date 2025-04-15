@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Project for PDF Merger</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <style>
+      body {
+        background: linear-gradient(-45deg, #f3ec78, #af4261, #43cea2, #185a9d);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      .main-content {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+      }
+
+      .form-wrapper {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 2rem 3rem;
+        border-radius: 20px;
+        box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.15);
+        max-width: 600px;
+        width: 100%;
+      }
+
+      h1 {
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Emorphis</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">Dropdown</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="form-wrapper">
+        <h1>PDF Merge Tool</h1>
+        <form method="post" action="/merge" enctype="multipart/form-data" onsubmit="return validateFiles()">
+          <div class="form-group">
+            <label for="pdfs">Select two PDF files to merge:</label>
+            <input type="file" name="pdfs" id="pdfs" class="form-control-file" multiple accept=".pdf">
+            <div id="error-message" class="text-danger mt-2"></div>
+          </div>
+          <div class="text-center">
+            <input class="btn btn-primary px-4" type="submit" value="Merge PDFs">
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Validation Script -->
+    <script>
+      function validateFiles() {
+        const files = document.getElementById('pdfs').files;
+        const errorMessageDiv = document.getElementById('error-message');
+        errorMessageDiv.textContent = '';
+
+        if (!files.length) {
+          errorMessageDiv.textContent = "Please select at least one PDF file.";
+          return false;
+        }
+        if (files.length < 2) {
+          errorMessageDiv.textContent = "Please select two PDF files to merge.";
+          return false;
+        }
+        if (files.length > 2) {
+          errorMessageDiv.textContent = "Please select maximum two PDF files only.";
+          return false;
+        }
+
+        return true;
+      }
+    </script>
+  </body>
+</html>
